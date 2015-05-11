@@ -1,0 +1,19 @@
+<p>
+  <b>Name:</b>
+  <%= @group.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @group.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_group_path(@group) %> |
+<%= link_to 'Back', groups_path %> |
+
+<% if @join.nil? %>
+<%= link_to 'Join', controller: 'groups', action: 'join', id: @group %>
+<% else %>
+<%= link_to 'Leave', controller: 'groups', action: 'leave', id: @group %>
+<% end %>

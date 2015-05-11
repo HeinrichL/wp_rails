@@ -1,4 +1,7 @@
 RailsStarter::Application.routes.draw do
+  resources :groups
+
+
   get '/users/login' => 'users#login'
   post '/users/login' => 'users#authenticate'
   resources :users
