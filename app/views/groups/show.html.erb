@@ -7,7 +7,12 @@
   <b>Description:</b>
   <%= @group.description %>
 </p>
-
+<p>
+ <b>Mitglieder</b>
+ <% @group.users.each do |u| %>
+   <%= link_to u.profile.firstname+" "+u.profile.surname, controller: 'profiles', action: 'show', id: u.profile %>
+ <% end %>
+</p>
 
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %> |

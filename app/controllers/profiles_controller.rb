@@ -1,4 +1,5 @@
 class ProfilesController < ApplicationController
+  before_filter :user_logged_in?
   # GET /profiles
   # GET /profiles.json
   def index

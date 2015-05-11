@@ -1,7 +1,9 @@
 RailsStarter::Application.routes.draw do
+  get 'groups/search' => 'groups#search'
+  get 'users/search' => 'users#search'
   resources :groups
 
-
+  get '/users/logout' => 'users#logout'
   get '/users/login' => 'users#login'
   post '/users/login' => 'users#authenticate'
   resources :users

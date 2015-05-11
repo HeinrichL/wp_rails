@@ -1,4 +1,6 @@
 class GroupsController < ApplicationController
+  before_filter :user_logged_in?
+  
   # GET /groups
   # GET /groups.json
   def index
@@ -94,5 +96,10 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
 	@group.users.destroy(session[:user_id])
 	redirect_to @group, notice: 'Group was successfully left.'
+  end
+  
+  # GET /groups/search?q=SERACH_CRITERIA
+  def search
+   @results = Group.where('name LIKE ? or description LIKE ?', "%#{request.GET['q']}%", "%#{request.GET['q']}%")
   end
 end

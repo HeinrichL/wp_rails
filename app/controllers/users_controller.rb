@@ -1,14 +1,25 @@
 class UsersController < ApplicationController
-  # GET /login
+  # GET /users/login
   def login
 
   end
   
+  # GET /users/logout
+  def logout
+	session.delete(:user_id)
+	redirect_to root_url
+  end
+  
+  # POST /users/authenticate
   def authenticate
 	if temp = User.where(email: params[:email], password: params[:password]).first
       session[:user_id] = temp.id
 	  flash.now[:notice] = "Login erfolgreich"
-	  redirect_to root_url
+	  if session[:location].nil?
+		redirect_to root_url
+	  else
+		redirect_to session[:location]
+	  end
 	else
 	  flash.now[:alert] = "Falsche E-Mail or falsches Passwort"
 	  render 'login'
@@ -57,10 +68,10 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-    @user.create_profile()
+    
     respond_to do |format|
       if @user.save
-	    
+	    @user.create_profile()
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
       else
@@ -97,4 +108,9 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  # GET /users/search?q=SEARCH_CRTIERA
+  def search
+   @results = Profile.where('firstname LIKE ? or surname LIKE ? or description LIKE ?', "%#{request.GET['q']}%", "%#{request.GET['q']}%", "%#{request.GET['q']}%")
+  end 
 end

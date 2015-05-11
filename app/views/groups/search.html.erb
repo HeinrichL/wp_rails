@@ -1,0 +1,30 @@
+<h1>Search Groups</h1>
+<%= form_tag({controller: "groups", action: "search"}, method: "get") do %>
+  <p>
+    <%= text_field_tag :q, params[:q] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Beschreibung</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+<% if not @results.nil? 
+ @results.each do |group| %>
+  <tr>
+    <td><%= group.name %></td>
+    <td><%= group.description %></td>
+    <td><%= link_to 'Show', group %></td>
+  </tr>
+<% end 
+end %>
+</table>
+
+<br />
+
+<%= link_to 'New Group', new_group_path %>

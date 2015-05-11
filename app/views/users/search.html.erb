@@ -1,0 +1,28 @@
+<h1>Search Users</h1>
+<%= form_tag({controller: "users", action: "search"}, method: "get") do %>
+  <p>
+    <%= text_field_tag :q, params[:q] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
+<table>
+  <tr>
+    <th>Firstname</th>
+    <th>Surname</th>
+    <th>Description</th>
+    <th>Birthday</th>
+    <th></th>
+  </tr>
+<% if not @results.nil? 
+ @results.each do |profile| %>
+  <tr>
+    <td><%= profile.firstname %></td>
+	<td><%= profile.surname %></td>
+	<td><%= profile.description %></td>
+    <td><%= profile.birthday %></td>
+    <td><%= link_to 'Show', profile %></td>
+  </tr>
+<% end 
+end %>
+</table>
