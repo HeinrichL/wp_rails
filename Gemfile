@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.1.5"
+ruby "2.0.0"
 gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
@@ -35,3 +35,6 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'sqlite3'
+gem 'ibm_db', group: :production
