@@ -1,4 +1,20 @@
 class UsersController < ApplicationController
+  # GET /login
+  def login
+
+  end
+  
+  def authenticate
+	if temp = User.where(email: params[:email], password: params[:password]).first
+      session[:user_id] = temp.id
+	  flash.now[:notice] = "Login erfolgreich"
+	  redirect_to root_url
+	else
+	  flash.now[:alert] = "Falsche E-Mail or falsches Passwort"
+	  render 'login'
+    end
+  end
+  
   # GET /users
   # GET /users.json
   def index
@@ -41,9 +57,10 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-
+    @user.create_profile()
     respond_to do |format|
       if @user.save
+	    
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
       else
