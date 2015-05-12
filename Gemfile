@@ -38,3 +38,4 @@ gem 'jquery-rails'
 
 gem 'sqlite3'
 gem 'ibm_db', group: :production
+gem 'sendgrid-ruby'

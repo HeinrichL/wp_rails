@@ -86,8 +86,11 @@ class GroupsController < ApplicationController
   # POST /groups/join/1
   def join
     @group = Group.find(params[:id])
-	@group.users << User.find(session[:user_id])
+	@recipient = @group.users.clone
+	@user = User.find(session[:user_id])
+	@group.users << @user
 	@group.save!
+	SendGridMailer.joined_group(@recipient, @user, @group)
 	redirect_to @group, notice: 'Group was successfully joined.'
   end
   
@@ -95,6 +98,9 @@ class GroupsController < ApplicationController
   def leave
     @group = Group.find(params[:id])
 	@group.users.destroy(session[:user_id])
+	@recipient = @group.users
+	@user = User.find(session[:user_id])
+	SendGridMailer.left_group(@recipient, @user, @group)
 	redirect_to @group, notice: 'Group was successfully left.'
   end
   
