@@ -64,5 +64,16 @@ module RailsStarter
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+	
+	# reconfigure actionmailer to use sendgrid as smtp server
+    config.action_mailer.smtp_settings = {
+	  :user_name => 'apOeJhQq2o',
+	  :password => '7Xxtii5x0n',
+	  :domain => 'bicycleonrails.eu-gb.mybluemix.net',
+	  :address => 'smtp.sendgrid.net',
+	  :port => 587,
+	  :authentication => :plain,
+	  :enable_starttls_auto => true
+	}
   end
 end

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><%= @user.profile.firstname %> posted in your group</h1>
+    <p>
+      The user <a href="<%= @url %>/profile/show/<%= @user.profile.id %>"><%= @user.profile.firstname %></a> posted in your <a href="<%= @url %>/groups/show/<%= @group_id %>">group</a>
+    </p>
+    <p>
+      To login to the site, just follow this link: <%= @url %>/users/login.
+    </p>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+<%= form_tag({controller: "posts", action: "create"}) do %>
+  <p>
+    <%= text_field :post, :message %>
+	<%= text_field :post, :group_id, :type => 'hidden', :value => params[:id] %>
+    <%= submit_tag "Post", :name => nil %>
+  </p>
+<% end %>

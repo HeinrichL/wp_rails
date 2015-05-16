@@ -1,0 +1,14 @@
+<p>
+  <b>Name:</b>
+  <%= @route.name %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%= @route.address %>
+</p>
+
+<p>Add to group</p>
+<%= render 'addGroup' %>
+
+<%= link_to 'Back', routes_path %>

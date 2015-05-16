@@ -22,3 +22,16 @@
 <% else %>
 <%= link_to 'Leave', controller: 'groups', action: 'leave', id: @group %>
 <% end %>
+
+<p><b>Appointments</b></p>
+<% @appointments.each do |a| %>
+<% logger.debug a.route.name %>
+<%= link_to(a.route.name, {controller: 'routes', action: 'show', id: a.route.id}) %> - <%= a.date %>
+<% end %>
+
+<p><b>Chat</b></p>
+<%= render partial: "/posts/create" %>
+<% @posts.each do |p| %>
+<%= link_to p.user.profile.firstname, p.user.profile %>
+<%= simple_format p.message %>
+<% end %>

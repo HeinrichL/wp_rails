@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150511201303) do
+ActiveRecord::Schema.define(:version => 20150516112555) do
+
+  create_table "appointments", :id => false, :force => true do |t|
+    t.integer "routes_id"
+    t.integer "groups_id"
+    t.date    "date"
+  end
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -25,6 +31,17 @@ ActiveRecord::Schema.define(:version => 20150511201303) do
     t.integer "groups_id"
   end
 
+  create_table "posts", :force => true do |t|
+    t.string   "message"
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "posts", ["group_id"], :name => "index_posts_on_group_id"
+  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
+
   create_table "profiles", :force => true do |t|
     t.string   "firstname"
     t.string   "surname"
@@ -36,6 +53,11 @@ ActiveRecord::Schema.define(:version => 20150511201303) do
   end
 
   add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id"
+
+  create_table "routes", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email"

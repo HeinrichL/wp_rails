@@ -1,6 +1,15 @@
 RailsStarter::Application.routes.draw do
-  get 'groups/search' => 'groups#search'
-  get 'users/search' => 'users#search'
+  post "posts/create"
+
+  get "/backend/rest/address/:address" => "backend#address"
+  get "/backend/rest/:action" => "backend#:action"
+  post "/backend/rest/:action" => "backend#:action"
+  get "/routes/search" => "routes#search"
+  get "/routes/show/:id" => "routes#show"
+  resources :routes
+  
+  get '/groups/search' => 'groups#search'
+  get '/users/search' => 'users#search'
   resources :groups
 
   get '/users/logout' => 'users#logout'

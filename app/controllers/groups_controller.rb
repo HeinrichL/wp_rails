@@ -17,6 +17,8 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
 	@join = @group.users.where(id: session[:user_id]).first
+	@posts = @group.posts.last(5)
+	@appointments = @group.appointments
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @group }
