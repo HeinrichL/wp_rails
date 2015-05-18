@@ -1,11 +1,20 @@
-<h1>Search Routes</h1>
-<%= form_tag({controller: "routes", action: "search"}) do %>
-  <p>
-    <%= text_field_tag :q, params[:q] %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
+<div class="row">
+    <div class="large-12 columns">
+	<h1>Search Routes</h1>	
+	<%= form_tag({controller: "routes", action: "search"}, :method => 'get') do %>
+      <div class="row collapse">
+        <div class="small-10 columns">
+              <%= text_field_tag :q, params[:q]%>
+        </div>
+        <div class="small-2 columns">
+          <%= submit_tag "Search", :name => nil, :class => 'button postfix' %>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>
 
+<% if not @results.nil? %>
 <table>
   <tr>
     <th>Name</th>
@@ -14,8 +23,7 @@
     <th></th>
     <th></th>
   </tr>
-<% if not @results.nil? 
- @results.each do |route| %>
+<% @results.each do |route| %>
   <tr>
     <td><%= route.name %></td>
     <td><%= route.address %></td>
@@ -24,7 +32,3 @@
 <% end 
 end %>
 </table>
-
-<br />
-
-<%= link_to 'New Route', :controller => new_route_path %>

@@ -5,5 +5,4 @@ class RouteControllerTest < ActionController::TestCase
     get :search
     assert_response :success
   end
-
 end

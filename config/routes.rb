@@ -1,6 +1,8 @@
 RailsStarter::Application.routes.draw do
-  post "posts/create"
+  get "default/welcome"
 
+  post "/posts/create"
+  post "/routes/add" => "routes#add_group"
   get "/backend/rest/address/:address" => "backend#address"
   get "/backend/rest/:action" => "backend#:action"
   post "/backend/rest/:action" => "backend#:action"
@@ -32,7 +34,7 @@ RailsStarter::Application.routes.draw do
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
   
-  root :to => 'say#hello'
+  root :to => 'default#welcome'
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products

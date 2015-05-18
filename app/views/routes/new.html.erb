@@ -1,16 +1,25 @@
+<div class="row">
+<div class="large-12 colums">
 <h1>New Route</h1>
 
 <%= form_tag({controller: "routes"}) do %>
-  <p>
-    <%= text_field_tag :name, params[:name], :placeholder => 'Name' %>
-  </p>
-  <p>
-	<%= text_field_tag :address, params[:address], :placeholder => 'Points of interests (comma seperated)', 'size' => 50 %>
-  </p>
-<%= render 'addGroup' %>
-  <p>
-      <%= submit_tag "Create Route", :name => nil %>
-  </p>
-<% end %>
 
-<%= link_to 'Back', routes_path %>
+    <%= text_field_tag :name, params[:name], :placeholder => 'Name' %>
+
+	<%= text_field_tag 'address[]', params[:address], :placeholder => 'Address, zip code, city, coutnry ', :class => 'address' %>
+</div>
+<%= render 'addGroup' %>
+<div class="row">
+<div class="large-12 columns">
+<p> &nbsp; </p>
+      <%= submit_tag "Create Route", :name => nil, :class=>"button" %>
+</div>
+<% end %>
+</div>
+
+</div>
+<script>
+$('form').on("keydown", ".address:last", function(e){
+  $(this).after('<%= text_field_tag 'address[]', params[:address], :placeholder => 'Address, zip code, city, coutnry ', :class => 'address' %>');
+});
+</script>

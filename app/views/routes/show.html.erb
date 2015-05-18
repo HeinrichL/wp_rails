@@ -1,14 +1,20 @@
-<p>
-  <b>Name:</b>
-  <%= @route.name %>
-</p>
+<div class="row">
+	<div class="large-12 columns">
+		<p>
+		  <b>Name:</b>
+		  <%= @route.name %>
+		</p>
 
-<p>
-  <b>Address:</b>
-  <%= @route.address %>
-</p>
+		<p>
+		  <b>Address:</b>
+		  <%= @route.address %>
 
-<p>Add to group</p>
-<%= render 'addGroup' %>
-
-<%= link_to 'Back', routes_path %>
+		</p>
+		<%= form_tag({controller: "routes", action: "add"}) do %>
+		<%= render 'addGroup' %>
+		<p> &nbsp; </p>
+		<%= text_field nil, :route_id, :type => 'hidden', :value => @route_id %>
+		<%= submit_tag "Add Route", :name => nil, :class=>"button" %>
+		<% end %>		
+	</div>
+</div>

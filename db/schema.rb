@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150516112555) do
+ActiveRecord::Schema.define(:version => 20150518212921) do
 
   create_table "appointments", :id => false, :force => true do |t|
     t.integer "routes_id"
@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(:version => 20150516112555) do
   create_table "routes", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "name"
+    t.text     "address"
   end
 
   create_table "users", :force => true do |t|

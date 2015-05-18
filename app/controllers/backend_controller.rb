@@ -15,4 +15,8 @@ class BackendController < ApplicationController
   def addRoute
   
   end
+  
+  def getRouteById
+  
+  end
 end

@@ -1,0 +1,44 @@
+<nav class="top-bar" data-topbar role="navigation">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="/">BicycleOnRails</a></h1>
+    </li>
+     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li class="has-dropdown <%= params[:controller]=='groups' ? 'active' : nil %>">
+        <%= link_to 'Groups', :controller => 'groups' %>
+        <ul class="dropdown">
+          <li><%= link_to 'New group', new_group_path %></li>
+          <li><%= link_to 'Search groups', :controller => 'groups', :action => 'search' %></li>
+        </ul>
+      </li>
+	  <li class="divider"></li>
+	  <li class="has-dropdown <%= params[:controller]=='users' ? 'active' : nil %>">
+        <a href="#">Users</a>
+        <ul class="dropdown">
+          <li><%= link_to 'Edit profile', edit_profile_path(session[:user_id]) %></li>
+          <li><%= link_to 'Search users', :controller => 'users', :action => 'search' %></li>
+        </ul>
+      </li>	  
+	  <li class="divider"></li>
+	  <li class="has-dropdown <%= params[:controller]=='routes' ? 'active' : nil %>">
+        <a href="#">Routes</a>
+        <ul class="dropdown">
+          <li><%= link_to 'New route', new_route_path %></li>
+          <li><%= link_to 'Search routes', :controller => 'routes', :action => 'search' %></li>
+        </ul>
+      </li>	 
+	  <li class="divider"></li>
+	  <li><%= link_to 'Log out', :controller => 'users', :action => 'logout' %></li>
+    </ul>
+
+    <!-- Left Nav Section -->
+    <ul class="left">
+    </ul>
+  </section>
+</nav>

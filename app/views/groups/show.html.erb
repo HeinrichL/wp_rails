@@ -10,7 +10,7 @@
 <p>
  <b>Mitglieder</b>
  <% @group.users.each do |u| %>
-   <%= link_to u.profile.firstname+" "+u.profile.surname, controller: 'profiles', action: 'show', id: u.profile %>
+   <%= link_to u.profile.firstname, controller: 'profiles', action: 'show', id: u.profile %>
  <% end %>
 </p>
 

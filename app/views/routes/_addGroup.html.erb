@@ -1,6 +1,8 @@
-  <p>
-<%= select_tag(:group_id, options_for_select(@groups)) %>
-  </p>
-  <p>    
-  <%= date_select :appointment, :date %>
-  </p>
+<div class="row">
+	<div class="large-12 columns">
+		<p><%= select_tag(:group_id, options_for_select(@groups)) %></p>
+	</div>
+  <div class="large-4 columns">
+  <%= date_select :appointment, :date, date_separator: '</div><div class="large-4 columns">' %>
+  </div>
+</div>
