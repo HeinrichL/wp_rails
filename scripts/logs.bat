@@ -1,0 +1,1 @@
+cf logs bicycleonrails --recent > logs.log
