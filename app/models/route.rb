@@ -31,18 +31,6 @@ class Route < ActiveRecord::Base
 	end
   end
   
-  def parse(json)
-	if json.is_a?(Hash)
-		json.each do |key, value| 
-		  self.send("#{key}=", value)
-		end
-	else
-	  raise ArgumentError, "Only hash is accepted as argument"
-	end
-	
-	self
-  end
-  
   def self.getRouteByIdAndSave(id)
     options = {}
     result = HTTParty.get(@base_uri+'/api/tyt/track/findByNr/'+id, options) 
