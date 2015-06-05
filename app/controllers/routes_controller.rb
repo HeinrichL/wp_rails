@@ -1,10 +1,12 @@
 class RoutesController < ApplicationController  
   include PostsHelper
-  include RoutesHelper
   # GET /routes/search
   def search
    if not params[:q].nil?
-     @results = Route.search(string_to_address(params[:q]))
+     result = Route.search(params[:q])
+	 logger.debug(result)
+	 @results = result[:result]
+	 @service = result[:service]
    end
   end
   
@@ -18,14 +20,7 @@ class RoutesController < ApplicationController
   
   # POST /routes
   def create
-    address = params[:address]
-	address = address.map do |a| 
-		if not a==""
-			string_to_address(a)
-		end
-	end
-
-	@route = Route.create({:label => params[:name], :laenge => "0", :autorName => "bicycleonrails", :tags => [params[:name]], :streckenpunkte => address.compact})
+	@route = Route.create({:name => params[:name], :address => params[:address].compact})
 
 	if not params[:group_id]==""
 	  @group = Group.find(params[:group_id])
@@ -39,7 +34,7 @@ class RoutesController < ApplicationController
   def show
     @route = Route.where(id: params[:id]).first
 	if @route.nil? 
-	  @route = Route.getRouteByIdAndSave params[:id]
+	  @route = Route.getRouteByIdAndSave params[:id], params[:service]
 	end
 	@route_id = params[:id]
 	@groups = [['Add to group (optional)', nil]]
