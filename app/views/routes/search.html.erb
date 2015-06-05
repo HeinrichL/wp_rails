@@ -27,7 +27,7 @@
   <tr>
     <td><%= route.name %></td>
     <td><%= route.address %></td>
-    <td><%= link_to 'Show', :controller => 'routes', :action => 'show', :id => route.id %></td>
+    <td><%= link_to 'Show', :controller => 'routes', :action => 'show', :id => route.id, :service => @service %></td>
   </tr>
 <% end 
 end %>
