@@ -15,6 +15,7 @@
         <ul class="dropdown">
           <li><%= link_to 'New group', new_group_path %></li>
           <li><%= link_to 'Search groups', :controller => 'groups', :action => 'search' %></li>
+          <li><%= link_to 'My groups', :controller => 'groups', :action => 'getByUser' %></li>
         </ul>
       </li>
 	  <li class="divider"></li>

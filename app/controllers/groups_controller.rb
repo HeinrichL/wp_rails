@@ -110,4 +110,10 @@ class GroupsController < ApplicationController
   def search
    @results = Group.where('name LIKE ? or description LIKE ?', "%#{request.GET['q']}%", "%#{request.GET['q']}%")
   end
+
+  # GET /groups/getByUser
+  def getByUser
+    @user = User.find(session[:user_id])
+    @results = @user.groups
+  end
 end
