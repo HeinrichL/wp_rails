@@ -11,6 +11,7 @@ RailsStarter::Application.routes.draw do
   resources :routes
   
   get '/groups/search' => 'groups#search'
+  get '/groups/getByUser' => 'groups#getByUser'
   get '/users/search' => 'users#search'
   resources :groups
 
