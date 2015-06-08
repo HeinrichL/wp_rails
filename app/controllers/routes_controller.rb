@@ -20,14 +20,26 @@ class RoutesController < ApplicationController
   
   # POST /routes
   def create
-	@route = Route.create({:name => params[:name], :address => params[:address].compact})
-
-	if not params[:group_id]==""
-	  @group = Group.find(params[:group_id])
-	  date = Date.new params[:appointment]["date(1i)"].to_i, params[:appointment]["date(2i)"].to_i, params[:appointment]["date(3i)"].to_i
-	  add_routes_to_group(@route, @group, date)
+	begin
+		@route = Route.create({:name => params[:name], :address => params[:address].compact})
+		if not params[:group_id].nil? and not params[:group_id].empty?
+		  @group = Group.find(params[:group_id])
+		  date = Date.new params[:appointment]["date(1i)"].to_i, params[:appointment]["date(2i)"].to_i, params[:appointment]["date(3i)"].to_i
+		  add_routes_to_group(@route, @group, date)
+		end
+		redirect_to({ :controller => "routes", :action => "show", :id => @route.id}, notice: 'Route was successfully created.')		
+	rescue TrackYourTracksAdapter::LabelAlreadyExistsError => e
+		@route = Route.new
+		@route.errors.add(:name, 'Name already exists')
+		new()
+		render 'new'
+	rescue StandardError => s
+		logger.debug (s)
+		@route = Route.new
+		@route.errors.add(:form, 'Unknown error occured')
+		new()
+		render 'new'
 	end
-	redirect_to({ :controller => "routes", :action => "show", :id => @route.id}, notice: 'Route was successfully created.')
   end
   
   # GET /routes/show/:id

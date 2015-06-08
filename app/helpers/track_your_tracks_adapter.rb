@@ -60,6 +60,10 @@ class TrackYourTracksAdapter
 	end
 	
 	def self.search(h)
+		if h.nil? or (h.is_a?(Hash) and not [:street, :number, :zip, :city, :country].any? {|x| h.has_key? x})
+			return []
+		end
+		
 		criteria = {:strasse => h[:street], :hausnummer => h[:number], :plz => h[:zip], :ort => h[:city], :Land => h[:country]}
 		Rails.logger.debug(criteria)
 		options = {:body => criteria.to_json, :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json'}}
@@ -75,7 +79,7 @@ class TrackYourTracksAdapter
 				self.hash_to_route(x)
 			end
 		else
-			raise StandardError			
+			[]		
 		end
 	end
 	

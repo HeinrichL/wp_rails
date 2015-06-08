@@ -1,4 +1,19 @@
 <div class="row">
+<% if not @route.nil? %>
+  <% if @route.errors.any? %>
+    <div id="error_explanation" class="large-6 columns">
+      <h2><%= pluralize(@route.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @route.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>
+</div>
+<div class="row">
 <div class="large-12 colums">
 <h1>New Route</h1>
 
@@ -6,7 +21,7 @@
 
     <%= text_field_tag :name, params[:name], :placeholder => 'Name' %>
 
-	<%= text_field_tag 'address[]', params[:address], :placeholder => 'Address, zip code, city, coutnry ', :class => 'address' %>
+	<%= text_field_tag 'address[]', nil, :placeholder => 'Address, zip code, city, coutnry ', :class => 'address' %>
 </div>
 <%= render 'addGroup' %>
 <div class="row">
@@ -20,6 +35,6 @@
 </div>
 <script>
 $('form').on("keydown", ".address:last", function(e){
-  $(this).after('<%= text_field_tag 'address[]', params[:address], :placeholder => 'Address, zip code, city, coutnry ', :class => 'address' %>');
+  $(this).after('<%= text_field_tag 'address[]', nil, :placeholder => 'Address, zip code, city, coutnry ', :class => 'address' %>');
 });
 </script>

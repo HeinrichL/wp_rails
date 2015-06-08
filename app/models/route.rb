@@ -53,15 +53,12 @@ class Route < ActiveRecord::Base
 	end
 	
 	hash[:address] = address
-	Rails.logger.debug('bla')
-	Rails.logger.debug(hash)
 	
-	begin
-		TrackYourTracksAdapter.create(hash)
-		#wp backend
-	rescue
-		
-	end
+
+
+	TrackYourTracksAdapter.create(hash)
+	#wp backend
+
 
   end
 end
