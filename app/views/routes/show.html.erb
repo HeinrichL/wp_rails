@@ -8,6 +8,11 @@
 		<p>
 		  <b>Address:</b>
 		  <%= @route.address %>
+          <%=
+              arr = JSON.parse(@route.address)
+              arr.each do |json|
+                p json['latitude']
+          %>
 
 		</p>
 		<%= form_tag({controller: "routes", action: "add"}) do %>
