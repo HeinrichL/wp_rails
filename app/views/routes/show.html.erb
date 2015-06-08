@@ -7,8 +7,7 @@
 
 		<p>
 		  <b>Address:</b>
-		  <%= @route.address %>
-
+		  <%= @route.address[0] %>
 		</p>
 		<%= form_tag({controller: "routes", action: "add"}) do %>
 		<%= render 'addGroup' %>
