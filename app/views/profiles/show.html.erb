@@ -1,22 +1,38 @@
-<p>
-  <b>Firstname:</b>
-  <%= @profile.firstname %>
-</p>
+<div class="row" id="card">
+  <div class="row">
+    <div class="large-12 columns">
+      <h1 class="h1">Show Profile</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-4 columns">
+      <img src="/assets/placeholder.png">
+    </div>
+    <div class="large-6 large-centered columns">
+      <p>
+        <b>Firstname:</b>
+        <%= @profile.firstname %>
+      </p>
 
-<p>
-  <b>Surname:</b>
-  <%= @profile.surname %>
-</p>
+      <p>
+        <b>Surname:</b>
+        <%= @profile.surname %>
+      </p>
 
-<p>
-  <b>Birthday:</b>
-  <%= @profile.birthday %>
-</p>
+      <p>
+        <b>Birthday:</b>
+        <%= @profile.birthday %>
+      </p>
 
-<p>
-  <b>Description:</b>
-  <%= @profile.description %>
-</p>
+      <p>
+        <b>Description:</b>
+        <%= @profile.description %>
+      </p>
 
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
+      <%= link_to 'Edit', edit_profile_path(@profile) %> |
+      <%= link_to 'Back', profiles_path %>
+    </div>
+  </div>
+</div>
+
+
