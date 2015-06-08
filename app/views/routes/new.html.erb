@@ -13,25 +13,24 @@
   <% end %>
 <% end %>
 </div>
-<div class="row">
-<div class="large-12 colums">
-<h1>New Route</h1>
+<div class="row" id="card">
+    <div class="large-12 colums">
+        <h1 class="h1">New Route</h1>
 
-<%= form_tag({controller: "routes"}) do %>
+        <%= form_tag({controller: "routes"}) do %>
 
-    <%= text_field_tag :name, params[:name], :placeholder => 'Name' %>
+            <%= text_field_tag :name, params[:name], :placeholder => 'Name' %>
 
-	<%= text_field_tag 'address[]', nil, :placeholder => 'Address, zip code, city, coutnry ', :class => 'address' %>
-</div>
-<%= render 'addGroup' %>
-<div class="row">
-<div class="large-12 columns">
-<p> &nbsp; </p>
-      <%= submit_tag "Create Route", :name => nil, :class=>"button" %>
-</div>
-<% end %>
-</div>
-
+            <%= text_field_tag 'address[]', nil, :placeholder => 'Address, zip code, city, coutnry ', :class => 'address' %>
+    </div>
+    <%= render 'addGroup' %>
+    <div class="row">
+        <div class="large-12 columns">
+        <p> &nbsp; </p>
+              <%= submit_tag "Create Route", :name => nil, :class=>"button" %>
+        </div>
+    <% end %>
+    </div>
 </div>
 <script>
 $('form').on("keydown", ".address:last", function(e){

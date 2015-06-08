@@ -1,6 +1,21 @@
-<h1>Editing profile</h1>
+<div class="row" id="card">
+  <div class="row">
+    <div class="large-12 columns">
+      <h1 class="h1">Editing Profile</h1>
+    </div>
+  </div>
+  <div class="row" >
+    <div class="large-4 large-centered columns" style=" text-align: center">
+      <img src="/assets/placeholder.png" style="max-height: 200px;">
+    </div>
+  </div>
+  <div class="row">
+      <%= render 'form' %>
+    <div class="large-4 large-centered columns" style="text-align: center">
+      <%= link_to 'Show', @profile %> |
+      <%= link_to 'Back', profiles_path %>
+    </div>
+  </div>
+</div>
 
-<%= render 'form' %>
 
-<%= link_to 'Show', @profile %> |
-<%= link_to 'Back', profiles_path %>

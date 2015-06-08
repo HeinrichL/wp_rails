@@ -1,19 +1,67 @@
-<div class="row">
-	<div class="large-12 columns">
-		<p>
-		  <b>Name:</b>
-		  <%= @route.name %>
-		</p>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+<script>
+    var directionsDisplay;
+    var directionsService = new google.maps.DirectionsService();
+    var map;
 
-		<p>
-		  <b>Address:</b>
-		  <%= @route.address[0] %>
-		</p>
-		<%= form_tag({controller: "routes", action: "add"}) do %>
-		<%= render 'addGroup' %>
-		<p> &nbsp; </p>
-		<%= text_field nil, :route_id, :type => 'hidden', :value => @route_id %>
-		<%= submit_tag "Add Route", :name => nil, :class=>"button" %>
-		<% end %>		
-	</div>
+    function initialize() {
+        directionsDisplay = new google.maps.DirectionsRenderer();
+        var chicago = new google.maps.LatLng(41.850033, -87.6500523);
+        var mapOptions = {
+            zoom: 6,
+            center: chicago
+        }
+        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        directionsDisplay.setMap(map);
+    }
+
+    function calcRoute(start, end) {
+        var waypts = [];
+
+        var request = {
+            origin: start,
+            destination: end,
+            //waypoints: waypts,
+            optimizeWaypoints: true,
+            travelMode: google.maps.TravelMode.WALKING
+        };
+        directionsService.route(request, function(response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+            }
+        });
+    }
+</script>
+
+<div class="row" id="card">
+  <div class="row">
+    <div class="large-12 columns">
+      <h1 class="h1">Routen</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 large-centered columns">
+      <div id="map" style="height:350px;"><script>initialize();calcRoute("Berliner Tor 7, Hamburg", "Berliner Tor 20, Hamburg");</script></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <p>
+        <b>Name:</b>
+        <%= @route.name %>
+      </p>
+
+      <p>
+        <b>Address:</b>
+        <% #An dieser Stelle einfach noch mal calcRoute("lat, lng", "lat, lng") aufrufen. %>
+        <%= @route.address %>
+      </p>
+      <%= form_tag({controller: "routes", action: "add"}) do %>
+          <%= render 'addGroup' %>
+          <p> &nbsp; </p>
+          <%= text_field nil, :route_id, :type => 'hidden', :value => @route_id %>
+          <%= submit_tag "Add Route", :name => nil, :class=>"button" %>
+      <% end %>
+    </div>
+  </div>
 </div>
