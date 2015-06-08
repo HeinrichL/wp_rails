@@ -1,37 +1,70 @@
-<p>
-  <b>Name:</b>
-  <%= @group.name %>
-</p>
+<div class="row" id="card">
+  <div class="row">
+    <div class="large-12 columns">
+      <h1 class="h1">Show Group</h1>
+    </div>
+  </div>
+  <div class="row" id="card" style="width: 80%">
+    <div class="large-12 columns">
+      <p>
+        <b>Name:</b>
+        <%= @group.name %>
+      </p>
 
-<p>
-  <b>Description:</b>
-  <%= @group.description %>
-</p>
-<p>
- <b>Mitglieder</b>
- <% @group.users.each do |u| %>
-   <%= link_to u.profile.firstname, controller: 'profiles', action: 'show', id: u.profile %>
- <% end %>
-</p>
+      <p>
+        <b>Description:</b>
+        <%= @group.description %>
+      </p>
+      <p>
+        <b>Mitglieder:</b>
+        <% @group.users.each do |u| %>
+            <%= link_to u.profile.firstname, controller: 'profiles', action: 'show', id: u.profile %>
+        <% end %>
+      </p>
 
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %> |
+      <%= link_to 'Edit', edit_group_path(@group) %> |
+      <%= link_to 'Back', groups_path %> |
 
-<% if @join.nil? %>
-<%= link_to 'Join', controller: 'groups', action: 'join', id: @group %>
-<% else %>
-<%= link_to 'Leave', controller: 'groups', action: 'leave', id: @group %>
-<% end %>
+      <% if @join.nil? %>
+          <%= link_to 'Join', controller: 'groups', action: 'join', id: @group %>
+      <% else %>
+          <%= link_to 'Leave', controller: 'groups', action: 'leave', id: @group %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns"><br></div>
+  </div>
+  <div class="row" id="card" style="width: 80%">
+    <div class="large-12 columns">
+      <p><b>Appointments</b></p>
+      <% @appointments.each do |a| %>
+          <% logger.debug a.route.name %>
+          <%= link_to(a.route.name, {controller: 'routes', action: 'show', id: a.route.id}) %> - <%= a.date %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns"><br></div>
+  </div>
+  <div class="row" id="card" style="width: 80%">
+    <div class="large-12 columns">
+      <p><b>Chat</b></p>
+      <%= render partial: "/posts/create" %>
+      <% @posts.each do |p| %>
+          <%= link_to p.user.profile.firstname, p.user.profile %>
+          <%= simple_format p.message %>
+      <% end %>
+    </div>
 
-<p><b>Appointments</b></p>
-<% @appointments.each do |a| %>
-<% logger.debug a.route.name %>
-<%= link_to(a.route.name, {controller: 'routes', action: 'show', id: a.route.id}) %> - <%= a.date %>
-<% end %>
+  </div>
+  <div class="row">
+      <div class="large-12 columns"><br></div>
+  </div>
+</div>
 
-<p><b>Chat</b></p>
-<%= render partial: "/posts/create" %>
-<% @posts.each do |p| %>
-<%= link_to p.user.profile.firstname, p.user.profile %>
-<%= simple_format p.message %>
-<% end %>
+
+
+
+
+

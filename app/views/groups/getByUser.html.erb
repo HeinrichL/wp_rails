@@ -1,27 +1,44 @@
-<h1>My Groups</h1>
-<%= form_tag({controller: "groups", action: "getByUser"}, method: "get") do %>
+<div class="row" id="card">
+  <div class="row">
+    <div class="large-12 columns">
+      <h1 class="h1">My Groups</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= form_tag({controller: "groups", action: "getByUser"}, method: "get") do %>
 
-<% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-4 large-centered columns" style="text-align: center">
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Beschreibung</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <% if not @results.nil?
+             @results.each do |group| %>
+                <tr>
+                  <td><%= group.name %></td>
+                  <td><%= group.description %></td>
+                  <td><%= link_to 'Show', group %></td>
+                </tr>
+            <% end
+               end %>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-4 large-centered columns" style="text-align: center">
+      <%= link_to 'New Group', new_group_path %>
+    </div>
+  </div>
+</div>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Beschreibung</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-  <% if not @results.nil?
-       @results.each do |group| %>
-          <tr>
-            <td><%= group.name %></td>
-            <td><%= group.description %></td>
-            <td><%= link_to 'Show', group %></td>
-          </tr>
-      <% end
-         end %>
-</table>
 
-<br />
 
-<%= link_to 'New Group', new_group_path %>
