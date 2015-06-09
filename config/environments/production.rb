@@ -61,4 +61,6 @@ RailsStarter::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
+  # replace this with your tracker code
+  GA.tracker = "UA-63927214-1" 
 end

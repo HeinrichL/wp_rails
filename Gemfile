@@ -40,3 +40,4 @@ gem 'sqlite3'
 gem 'ibm_db', group: :production
 gem 'httparty'
 gem 'jquery-slick-rails'
+gem 'google-analytics-rails', group: :production
