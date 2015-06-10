@@ -7,6 +7,7 @@ class RoutesController < ApplicationController
 	 logger.debug(result)
 	 @results = result[:result]
 	 @service = result[:service]
+		 render partial: "livesearch", layout: false
    end
   end
   

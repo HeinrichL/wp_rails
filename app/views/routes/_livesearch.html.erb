@@ -1,0 +1,18 @@
+<% if not @results.nil? %>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <% @results.each do |route| %>
+          <tr>
+            <td style="word-break:break-all;word-wrap:break-word"><%= route.name %></td>
+            <td><%= route.address %></td>
+            <td><%= link_to 'Show', :controller => 'routes', :action => 'show', :id => route.id, :service => @service %></td>
+          </tr>
+    <% end
+       end %>
+</table>
