@@ -2,38 +2,26 @@
   <div class="row">
     <div class="large-12 columns">
       <h1 class="h1">Search Routes</h1>
-      <%= form_tag({controller: "routes", action: "search"}, :method => 'get') do %>
+      <%= form_tag({controller: "routes", action: "search"}, :method => 'get', :id => "live-search-form") do %>
           <div class="row collapse">
-            <div class="small-10 columns">
-              <%= text_field_tag :q, params[:q]%>
-            </div>
-            <div class="small-2 columns">
-              <%= submit_tag "Search", :name => nil, :class => 'button postfix' %>
+            <div class="small-12 columns">
+              <%= text_field_tag :q, params[:q], :placeholder => "Enter the routes name or address...", :id => "big-search-box"%>
             </div>
           </div>
       <% end %>
     </div>
-    <div class="large-12 columns">
-      <% if not @results.nil? %>
-          <table>
-            <tr>
-              <th>Name</th>
-              <th>Address</th>
-              <th></th>
-              <th></th>
-              <th></th>
-            </tr>
-            <% @results.each do |route| %>
-                <tr>
-                  <td style="word-break:break-all;word-wrap:break-word"><%= route.name %></td>
-                  <td><%= route.address %></td>
-                  <td><%= link_to 'Show', :controller => 'routes', :action => 'show', :id => route.id, :service => @service %></td>
-                </tr>
-          <% end
-             end %>
-      </table>
+    <div class="large-12 columns" id="live-search-results">
     </div>
   </div>
 </div>
 
-
+<script>
+    $("#big-search-box").bind("keyup", function() {
+        var form = $("#live-search-form"); // grab the form wrapping the search bar.
+        var url = "/routes/search"; // live_search action.
+        var formData = form.serialize(); // grab the data in the form
+        $.get(url, formData, function(html) { // perform an AJAX get
+            $("#live-search-results").html(html); // replace the "results" div with the results
+        });
+    });
+</script>
