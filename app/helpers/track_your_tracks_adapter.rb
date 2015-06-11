@@ -34,6 +34,7 @@ class TrackYourTracksAdapter
 			self.create(track)		
 		elsif result.response.instance_of?(Net::HTTPOK)
 			route = self.hash_to_route(result.parsed_response)
+			route['address'] = JSON.generate(route['address'])
 			route.save!
 			route
 		else
@@ -91,7 +92,9 @@ class TrackYourTracksAdapter
 			self.get_token()
 			self.getRouteById(id)
 		elsif result.response.instance_of?(Net::HTTPOK)
-			self.hash_to_route(result)
+			route = self.hash_to_route(result)
+			route['address'] = JSON.generate(route['address'])
+			route
 		elsif result.response.instance_of?(Net::HTTPBadRequest)
 			raise RuntimeError, "Couldn't find Route with id #{id}"
 		else

@@ -13,10 +13,30 @@
     </div>
   </div>
   <div class="row">
-    <div class="large-4 columns">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
-    <div class="large-4 columns">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
-    <div class="large-4 columns">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
-  </div>
+	<div class="large-6 columns">
+		<ul class="pricing-table">
+		  <li class="title">Standard</li>
+		  <li class="price red">Free</li>
+		  <li class="description">An awesome description</li>
+		  <li class="bullet-item">Connect with likeminded</li>
+		  <li class="bullet-item">Join up to 4 user groups</li>
+		  <li class="bullet-item">searching routes</li>
+		  <li class="bullet-item">custom profile</li>
+		  <li class="cta-button"><%= link_to "Register Now", {controller: "users", action: "new", mode: "free"}, class: "button" %></li>
+		</ul>
+	</div>
+	<div class="large-6 columns">
+		<ul class="pricing-table">
+		  <li class="title">Premium</li>
+		  <li class="price">only 3$ / month</li>
+		  <li class="description">An awesome description</li>
+		  <li class="bullet-item">Join unlimited groups</li>
+		  <li class="bullet-item">Profile feature</li>
+		  <li class="bullet-item">extended search</li>
+		   <li class="bullet-item">no ads</li>
+		  <li class="cta-button"><%= link_to "Register Now", {controller: "users", action: "new", mode: "premium"}, class: "button" %></li>
+		</ul>
+	</div></div>
 </div>
 
 <script type="text/javascript">

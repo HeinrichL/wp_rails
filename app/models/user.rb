@@ -1,4 +1,5 @@
-class User < ActiveRecord::Base
+class User < ActiveRecord::Base 
+  #enum mode: [:free, :premium]
   has_one :profile, autosave: true
   has_and_belongs_to_many :groups, :foreign_key => 'users_id', :association_foreign_key => 'groups_id' 
   attr_accessible :email, :password

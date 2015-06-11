@@ -41,7 +41,15 @@
   </div>
   <div class="row">
     <div class="large-12 large-centered columns">
-      <div id="map" style="height:350px;"><script>initialize();calcRoute("Berliner Tor 7, Hamburg", "Berliner Tor 20, Hamburg");</script></div>
+      <div id="map" style="height:350px;"><script>initialize(); <%= -%>
+	  <% old = nil 
+	  @route.address.each do |x| %>
+	  <% if old %>
+		calcRoute("<%= x["latitude"] %>,<%= x["longitude"] %>","<%= old["latitude"] %>,<%= old["longitude"] %>");
+	   <% end %>
+	  <% old = x %>
+	  <% end %>
+	  </script></div>
     </div>
   </div>
   <div class="row">
@@ -53,8 +61,9 @@
 
       <p>
         <b>Address:</b>
-        <% #An dieser Stelle einfach noch mal calcRoute("lat, lng", "lat, lng") aufrufen. %>
-        <%= @route.address %>
+        <% @route.address.each do |x| %>
+			<%= x["strasse"] %> <%= x["hausnummer"] %>, <%= x["plz"] %> <%= x["ort"] %> <%= x["Land"] %><br>
+		<% end %>
       </p>
       <%= form_tag({controller: "routes", action: "add"}) do %>
           <%= render 'addGroup' %>

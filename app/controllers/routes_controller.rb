@@ -48,6 +48,8 @@ class RoutesController < ApplicationController
 	if @route.nil? 
 	  @route = Route.getRouteByIdAndSave params[:id], params[:service]
 	end
+	
+	@route[:address] = JSON.parse(@route[:address])
 	@route_id = params[:id]
 	@groups = [['Add to group (optional)', nil]]
 	User.find(session[:user_id]).groups.each do |g|
