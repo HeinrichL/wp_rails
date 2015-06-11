@@ -45,7 +45,7 @@
 	  <% old = nil 
 	  @route.address.each do |x| %>
 	  <% if old %>
-		calcRoute("<%= x["latitude"] %>,<%= x["longitude"] %>","<%= old["latitude"] %>,<%= old["longitude"] %>");
+		calcRoute("<%= old["latitude"] %>,<%= old["longitude"] %>","<%= x["latitude"] %>,<%= x["longitude"] %>");
 	   <% end %>
 	  <% old = x %>
 	  <% end %>
