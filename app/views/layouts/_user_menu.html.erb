@@ -11,7 +11,9 @@
     <!-- Right Nav Section -->
     <ul class="right">
       <li class="has-dropdown <%= params[:controller]=='groups' ? 'active' : nil %>">
-        <%= link_to 'Groups', :controller => 'groups' %>
+        <%= link_to 'Groups', :controller => 'groups' do%>
+            <i class="fi-torsos-all-female"></i> Groups
+            <% end %>
         <ul class="dropdown">
           <li><%= link_to 'New group', new_group_path %></li>
           <li><%= link_to 'Search groups', :controller => 'groups', :action => 'search' %></li>
@@ -28,14 +30,23 @@
       </li>	  
 	  <li class="divider"></li>
 	  <li class="has-dropdown <%= params[:controller]=='routes' ? 'active' : nil %>">
-        <a href="#">Routes</a>
+        <a href="#"><i class="fi-map"></i> Routes</a>
         <ul class="dropdown">
-          <li><%= link_to 'New route', new_route_path %></li>
-          <li><%= link_to 'Search routes', :controller => 'routes', :action => 'search' %></li>
+          <li><%= link_to 'New route', new_route_path do %>
+                <i class="fi-clipboard-pencil"></i> New route
+                <% end %>
+          </li>
+          <li><%= link_to 'Search routes', :controller => 'routes', :action => 'search' do %>
+                <i class="fi-magnifying-glass"></i> Search routes
+                <% end %>
+          </li>
         </ul>
       </li>	 
 	  <li class="divider"></li>
-	  <li><%= link_to 'Log out', :controller => 'users', :action => 'logout' %></li>
+	  <li><%= link_to 'Log out', :controller => 'users', :action => 'logout' do %>
+            <i class="fi-x"></i>  Logout
+            <% end %>
+      </li>
     </ul>
 
     <!-- Left Nav Section -->
