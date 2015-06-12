@@ -15,16 +15,10 @@
     </div>
         <div class="row">
           <div class="large-12 columns">
+			<%= f.label :free, raw("Free #{f.radio_button(:mode, "free", id: "user_free", checked: @free)}") %>
+			<%= f.label :premium, raw("Premium #{f.radio_button(:mode, "premium", id: "user_premium", checked: @premium)}") %>
             <%= f.text_field :email, :placeholder => 'E-Mail' %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="large-12 columns">
             <%= f.password_field :password, :placeholder => 'Password' %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="large-12 columns">
             <%= text_field :profile, :firstname, :placeholder => "Firstname" %>
             <div class="actions">
               <%= f.submit %>
