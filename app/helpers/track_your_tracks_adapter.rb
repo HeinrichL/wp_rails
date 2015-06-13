@@ -35,7 +35,7 @@ class TrackYourTracksAdapter
 		elsif result.response.instance_of?(Net::HTTPOK)
 			route = self.hash_to_route(result.parsed_response)
 			route['address'] = JSON.generate(route['address'])
-			route.save!
+			#route.save!
 			route
 		else
 			begin 
