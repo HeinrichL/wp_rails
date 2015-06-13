@@ -15,15 +15,26 @@
         directionsDisplay.setMap(map);
     }
 
-    function calcRoute(start, end) {
+    function calcRoute() {
+        var data = <%= @route.address.to_json.html_safe %>
+        var start = data[0];
+        start = start.strasse + " " + start.hausnummer + ", " + start.plz + " " + start.ort + " " + start.Land;
+        var end = data[data.length - 1];
+        end = end.strasse + " " + end.hausnummer + ", " + end.plz + " " + end.ort + " " + end.Land;
+
         var waypts = [];
+
+        for(i = 1; i < data.length - 1; i++){
+            var temp = data[i].strasse + " " + data[i].hausnummer + ", " + data[i].plz + " " + data[i].ort + " " + data[i].Land;
+            waypts.push({location:temp, stopover:true});
+        }
 
         var request = {
             origin: start,
             destination: end,
-            //waypoints: waypts,
+            waypoints: waypts,
             optimizeWaypoints: true,
-            travelMode: google.maps.TravelMode.WALKING
+            travelMode: google.maps.TravelMode.BICYCLING
         };
         directionsService.route(request, function(response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
@@ -41,15 +52,7 @@
   </div>
   <div class="row">
     <div class="large-12 large-centered columns">
-      <div id="map" style="height:350px;"><script>initialize(); <%= -%>
-	  <% old = nil 
-	  @route.address.each do |x| %>
-	  <% if old %>
-		calcRoute("<%= old["latitude"] %>,<%= old["longitude"] %>","<%= x["latitude"] %>,<%= x["longitude"] %>");
-	   <% end %>
-	  <% old = x %>
-	  <% end %>
-	  </script></div>
+      <div id="map" style="height:350px;"><script>initialize();calcRoute();</script></div>
     </div>
   </div>
   <div class="row">
