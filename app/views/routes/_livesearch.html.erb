@@ -9,10 +9,16 @@
       </tr>
       <% @results.each do |route| %>
           <tr>
-            <td style="word-break:break-all;word-wrap:break-word"><%= route.name %></td>
-            <td><%= route.address %></td>
+            <td style="word-break:break-all;word-wrap:break-word; width:25%"><%= route.name %></td>
+            <td>
+              Wegpunkte: <br>
+              <% route.address.each do |x| %>
+                  <%= x["strasse"] %> <%= x["hausnummer"] %>, <%= x["plz"] %> <%= x["ort"] %> <%= x["Land"] %>
+                  <br>
+                  <% end %>
+            </td>
             <td><%= link_to 'Show', :controller => 'routes', :action => 'show', :id => route.id, :service => @service %></td>
           </tr>
-    <% end
-       end %>
+    <% end %>
 </table>
+<% end %>
