@@ -28,6 +28,7 @@
         <%= f.date_select :birthday %>
       </div>
     </div>
+    <br>
     <div class="row">
       <div class="large-8 large-centered columns">
         <%= f.label :description %><br />
@@ -36,8 +37,9 @@
     </div>
     <div class="row">
       <div class="large-8 large-centered columns">
-        <div class="actions">
-          <%= f.submit %>
+        <br>
+        <div class="actions" style="text-align: center">
+          <%= f.submit "Update Profile", :class => "button radius", :style => "background: #333;" %>
         </div>
       </div>
     </div>
