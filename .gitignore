@@ -28,3 +28,4 @@ doc/*
 .jira-url
  
 vendor/*
+db/schema.rb

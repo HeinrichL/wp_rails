@@ -1,7 +1,7 @@
 <nav class="top-bar" data-topbar role="navigation">
   <ul class="title-area">
     <li class="name">
-      <h1><a href="/">BicycleOnRails</a></h1>
+      <h1><a href="/"><img src="/assets/bikelogo.png" class="logo"> BicycleOnRails</a></h1>
     </li>
      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -11,44 +11,37 @@
     <!-- Right Nav Section -->
     <ul class="right">
       <li class="has-dropdown <%= params[:controller]=='groups' ? 'active' : nil %>">
-        <%= link_to 'Groups', :controller => 'groups' do%>
-            <i class="fi-torsos-all-female"></i> Groups
-            <% end %>
+        <a href="/groups"><i class="fi-torsos-all-female"></i> Groups</a>
         <ul class="dropdown">
-          <li><%= link_to 'New group', new_group_path %></li>
-          <li><%= link_to 'Search groups', :controller => 'groups', :action => 'search' %></li>
-          <li><%= link_to 'My groups', :controller => 'groups', :action => 'getByUser' %></li>
+          <li><a href="/groups/new"><i class="fi-magnifying-glass"></i> New group</a></li>
+          <li><a href="/groups/search"><i class="fi-list"></i> Search groups</a></li>
+          <li><a href="/groups/getByUser"><i class="fi-torsos-female-male"></i> My groups</a></li>
         </ul>
       </li>
-	  <li class="divider"></li>
-	  <li class="has-dropdown <%= params[:controller]=='users' ? 'active' : nil %>">
-        <a href="#">Users</a>
+      <li class="divider"></li>
+      <li class="has-dropdown <%= params[:controller]=='users' ? 'active' : nil %>">
+        <a><i class="fi-male-female"></i> Users</a>
         <ul class="dropdown">
-          <li><%= link_to 'Edit profile', edit_profile_path(session[:user_id]) %></li>
-          <li><%= link_to 'Search users', :controller => 'users', :action => 'search' %></li>
+          <li><a href="/profiles/<%= session[:user_id] %>/edit"><i class="fi-clipboard-pencil"></i> Edit profile</a></li>
+          <li><a href="/users/search"><i class="fi-magnifying-glass"></i> Search users</a></li>
         </ul>
-      </li>	  
-	  <li class="divider"></li>
-	  <li class="has-dropdown <%= params[:controller]=='routes' ? 'active' : nil %>">
+      </li>
+      <li class="divider"></li>
+      <li class="has-dropdown <%= params[:controller]=='routes' ? 'active' : nil %>">
         <a href="#"><i class="fi-map"></i> Routes</a>
         <ul class="dropdown">
-          <li><%= link_to 'New route', new_route_path do %>
-                <i class="fi-clipboard-pencil"></i> New route
-                <% end %>
+          <li><a href="/routes/new"><i class="fi-marker"></i> New route</a>
           </li>
-          <li><%= link_to 'Search routes', :controller => 'routes', :action => 'search' do %>
-                <i class="fi-magnifying-glass"></i> Search routes
-                <% end %>
+          <li>
+            <a href="/routes/search"><i class="fi-magnifying-glass"></i> Search routes</a>
           </li>
         </ul>
-      </li>	 
-	  <li class="divider"></li>
-	  <li><%= link_to 'Log out', :controller => 'users', :action => 'logout' do %>
-            <i class="fi-x"></i>  Logout
-            <% end %>
+      </li>
+      <li class="divider"></li>
+      <li>
+        <a href="/users/logout"><i class="fi-x"></i>  Logout</a>
       </li>
     </ul>
-
     <!-- Left Nav Section -->
     <ul class="left">
     </ul>

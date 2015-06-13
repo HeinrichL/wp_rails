@@ -36,3 +36,22 @@ i{
     text-shadow: 0 1px 3px rgba(0,0,0,0.25);
     color: #88ffa8;
 }
+
+.logo{
+    max-height: 40px;
+    margin-right: auto;
+    font-family: verdana,serif;
+    font-size: 50px;
+    max-font-size: 60px;
+    vertical-align: middle;
+}
+
+.top-bar{
+     font-size: x-large;
+     color: white;
+     text-decoration: none;
+     text-underline: none;
+ }
+
+.top-bar.name:hover{
+}
