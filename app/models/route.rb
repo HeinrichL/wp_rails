@@ -13,13 +13,20 @@ class Route < ActiveRecord::Base
   #
   def self.search(search_criteria)
     criteria = self.validateAddress(search_criteria)
+		#criteria = search_criteria
 		Rails.logger.debug(criteria)
-		tytSearch = TrackYourTracksAdapter.search(criteria)
-		if tytSearch == []
-			{:service => :WPBackendAdapter, :result => WPBackendAdapter.searchRoute(criteria)}
+		if !criteria.nil?
+			tytSearch = TrackYourTracksAdapter.search(criteria)
+
+			if tytSearch.empty?
+				res = {:service => :WPBackendAdapter, :result => WPBackendAdapter.getRoutesByDescription(search_criteria)}
+			else
+				res = {:service => :TrackYourTracksAdapter, :result => tytSearch}
+			end
 		else
-			{:service => :TrackYourTracksAdapter, :result => tytSearch}
+			res = {:service => :WPBackendAdapter, :result => WPBackendAdapter.getRoutesByDescription(search_criteria)}
 		end
+		res
   end
   
   def self.getRouteByIdAndSave(id, service)
@@ -28,7 +35,7 @@ class Route < ActiveRecord::Base
 			route.save!
 			route
 		elsif service == WPB
-			route = WPBackendAdapter.getRouteById(id)
+			route = WPBackendAdapter.getRouteByID(id)
 			route.save!
 			route
 		else

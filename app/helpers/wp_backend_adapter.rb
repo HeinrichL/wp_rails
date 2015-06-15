@@ -18,7 +18,7 @@ class WPBackendAdapter
 
   @@username = 'bicycleonrails'
   @@password = 'geheim'
-  @@UserId = 5
+  #@@UserId = self.getUserId()
 
   ## Auth-Token
   # holt ein aktuelles Auth-Token vom Backend
@@ -99,16 +99,20 @@ class WPBackendAdapter
   def self.getRouteByID(id)
     options = {:body => {:id => id}, :headers => { 'Content-Type' => 'application/x-www-form-urlencoded', 'Accept' => 'application/json'}}
     result = HTTParty.post(@@backend_rest_uri+'/routes/getRoute?access_token=' + get_token, options)
-    handleResult(result) {|x| hash_to_route(x[0])}
+    handleResult(result) do |x|
+      route = hash_to_route(x[0])
+      route['address'] = JSON.generate(route['address'])
+      route
+    end
   end
 
   ## /routes/getRoute
   # gibt Route nach bezeichnung zurueck
-  def self.getRouteByDescription(descr)
-    options = {:body => {:Bezeichnung => descr}, :headers => { 'Content-Type' => 'application/x-www-form-urlencoded', 'Accept' => 'application/json'}}
+  def self.getRoutesByDescription(descr)
+    options = {:body => {:routename => '%'+descr+'%', :version => 2}, :headers => { 'Content-Type' => 'application/x-www-form-urlencoded', 'Accept' => 'application/json'}}
     result = HTTParty.post(@@backend_rest_uri+'/routes/getRoute?access_token=' + get_token, options)
-    #handleResult(result) {|x| hash_to_route(x[0])}
-    result
+    handleResult(result) { |routes| routes.empty? ? [] : routes.map {|x| hash_to_route(x)}}
+    #result
   end
 
   ## /user/getRoutes
@@ -132,7 +136,7 @@ class WPBackendAdapter
   ## /user/addFav
   # verknüpft Route mit Applikationsaccount
   def self.addRouteToBoR(idRoute, routename)
-    options = {:body => {iduser: @@UserId,
+    options = {:body => {iduser: getUserId(),
                          username: @@username,
                          idroute: idRoute,
                          routename: routename},
@@ -144,7 +148,7 @@ class WPBackendAdapter
   ## /user/delFav
   # entfernt Route vom Applikationsaccount
   def self.deleteRouteFromBoR(idRoute, routename)
-    options = {:body => {iduser: @@UserId,
+    options = {:body => {iduser: getUserId(),
                          username: @@username,
                          idroute: idRoute,
                          routename: routename},
@@ -189,7 +193,7 @@ class WPBackendAdapter
     elsif result['status'] == '403'
       raise UnauthorizedError
     elsif (result['status'] == '400' or result['status'] == '200') and result['size'] == 0
-      "no data available"
+      yield([])
     else
       raise UnhandledError
     end
