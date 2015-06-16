@@ -11,8 +11,10 @@
   <body>
 <% if session[:user_id].nil? %>
 <%= render 'layouts/guest_menu' %>
+      <div style="text-align: center"><img src="http://ad-server.eu/efiliale/pb/PW-689_Affiliate_BannerSet_20150521_03/postbus_banner_superbanner_728x90px_01.jpg"></div>
 <% else %>
 <%= render 'layouts/user_menu' %>
+      <div style="text-align: center"><img src="http://ad-server.eu/efiliale/pb/PW-689_Affiliate_BannerSet_20150521_03/postbus_banner_superbanner_728x90px_01.jpg"></div>
 <% end %>
 <% flash.each do |name, msg| -%>
   <%= content_tag :div, msg, class: "alert-box radius #{name}" %>
